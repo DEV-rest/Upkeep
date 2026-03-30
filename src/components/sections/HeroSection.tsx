@@ -1,10 +1,87 @@
+import { useRef } from "react";
 import heroVideo from "../../data/media/hero.mp4";
 import { Navbar } from "../layout/Navbar";
 import { Button } from "../ui/Button";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+
+gsap.registerPlugin(useGSAP);
 
 export function HeroSection() {
+  const containerRef = useRef<HTMLElement>(null);
+
+  useGSAP(() => {
+    const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+
+    // Video fade in
+    tl.fromTo(
+      ".hero-video",
+      { opacity: 0, scale: 1.05 },
+      { opacity: 1, scale: 1, duration: 2, ease: "power2.out" }
+    );
+
+    // Navbar slide down
+    tl.fromTo(
+      ".nav",
+      { y: -80, opacity: 0 },
+      { y: 0, opacity: 1, duration: 1.2, ease: "expo.out" },
+      "-=1.5"
+    );
+
+    // Backdrop fade in
+    tl.fromTo(
+      ".hero-backdrop",
+      { opacity: 0 },
+      { opacity: 1, duration: 1.5 },
+      "<"
+    );
+
+    // Stagger text content (Eyebrow, H1, Copy)
+    tl.fromTo(
+      [".eyebrow", "h1", ".hero-copy"],
+      { y: 50, opacity: 0, filter: "blur(10px)" }, // Filter blur for extra premium feel
+      { y: 0, opacity: 1, filter: "blur(0px)", duration: 1.2, stagger: 0.2, ease: "power4.out" },
+      "-=1.2"
+    );
+
+    // Actions fade in with a slight spring
+    tl.fromTo(
+      ".hero-actions",
+      { y: 30, opacity: 0 },
+      { y: 0, opacity: 1, duration: 1, ease: "back.out(1.5)" },
+      "-=0.9"
+    );
+    
+    // Availability note fade
+    tl.fromTo(
+      ".hero-availability-note",
+      { opacity: 0 },
+      { opacity: 1, duration: 0.8 },
+      "-=0.6"
+    );
+
+    // Right panel entrance
+    tl.fromTo(
+      ".hero-panel-shell",
+      { scale: 0.9, opacity: 0, x: 40 },
+      { scale: 1, opacity: 1, x: 0, duration: 1.2, ease: "back.out(1.2)" },
+      "-=1.5"
+    );
+
+    // Continual floating animation for the panel
+    gsap.to(".hero-panel-shell", {
+      y: -15,
+      duration: 3,
+      repeat: -1,
+      yoyo: true,
+      ease: "sine.inOut",
+      delay: 2 // Start after entrance finishes
+    });
+    
+  }, { scope: containerRef });
+
   return (
-    <header className="hero" id="top">
+    <header className="hero" id="top" ref={containerRef}>
       <video
         autoPlay
         className="hero-video"

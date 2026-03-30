@@ -13,7 +13,7 @@ function App() {
     <div className="page-shell">
       <HeroSection />
       <main>
-        <TrustStrip />
+        {/* <TrustStrip /> */}
         <ServicesSection />
         <HowItWorksSection />
         <PortfolioSection />
