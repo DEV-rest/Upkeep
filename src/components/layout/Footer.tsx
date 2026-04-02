@@ -1,13 +1,11 @@
 import { siteContact, siteNavigation } from "../../constants/site";
+import { Brand } from "../ui/Brand";
 
 export function Footer() {
   return (
     <footer className="footer">
       <div>
-        <a className="brand footer-brand" href="#top">
-          <span className="brand-mark">U</span>
-          <span className="brand-text">Upkeep</span>
-        </a>
+        <Brand className="footer-brand" />
         <p>A modern platform for premium home services and trusted local execution.</p>
       </div>
 

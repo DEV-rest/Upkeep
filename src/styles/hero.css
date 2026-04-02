@@ -1,7 +1,7 @@
 .hero {
   position: relative;
   min-height: 100vh;
-  padding: 24px clamp(20px, 4vw, 48px) 72px;
+  padding: 112px clamp(20px, 4vw, 48px) 72px;
   color: var(--white-soft);
   background: var(--green-deep-2);
   overflow: clip;
@@ -30,9 +30,9 @@
   position: relative;
   z-index: 1;
   display: grid;
-  grid-template-columns: minmax(0, 1.08fr) minmax(320px, 400px);
+  grid-template-columns: minmax(0, 1fr) minmax(420px, 480px);
   align-items: center;
-  gap: clamp(32px, 4vw, 56px);
+  gap: clamp(32px, 4vw, 64px);
   min-height: calc(100vh - 112px);
   width: min(100%, var(--max-width));
   margin: 0 auto;
@@ -44,7 +44,7 @@
   display: grid;
   align-content: center;
   gap: 24px;
-  max-width: 620px;
+  max-width: 660px;
 }
 
 .hero h1,
@@ -56,9 +56,13 @@
 }
 
 .hero h1 {
-  max-width: 8.5ch;
-  font-size: clamp(3.6rem, 7vw, 6.2rem);
+  max-width: 10.8ch;
+  font-size: clamp(4rem, 7.8vw, 7rem);
   text-wrap: balance;
+}
+
+.hero-nowrap {
+  white-space: nowrap;
 }
 
 .hero-copy {
@@ -98,14 +102,19 @@
 
 .hero-panel {
   position: relative;
+  z-index: 4;
+  justify-self: start;
+  width: 100%;
+  max-width: 480px;
 }
 
 .hero-panel-shell {
   display: grid;
-  gap: 18px;
+  gap: 16px;
   padding: 28px;
   border: 1px solid rgba(248, 246, 241, 0.18);
   border-radius: 28px;
+  overflow: visible;
   background:
     linear-gradient(180deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.05)),
     rgba(28, 45, 34, 0.42);
@@ -150,34 +159,92 @@
 .hero-panel-description {
   margin: 0;
   color: rgba(248, 246, 241, 0.76);
-  line-height: 1.7;
+  font-size: 0.98rem;
+  line-height: 1.55;
 }
 
-.hero-panel-points {
+.hero-panel-fields {
   display: grid;
   gap: 14px;
+  position: relative;
 }
 
-.hero-panel-points div {
+.hero-service-form label {
   display: grid;
-  gap: 6px;
-  padding-top: 14px;
-  border-top: 1px solid rgba(248, 246, 241, 0.1);
-}
-
-.hero-panel-points strong {
+  gap: 8px;
   color: var(--white-soft);
-  font-size: 0.96rem;
+  font-size: 0.98rem;
+  font-weight: 700;
 }
 
-.hero-panel-points span {
-  color: rgba(248, 246, 241, 0.72);
-  line-height: 1.6;
+.intake-row.hero-intake-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+  align-items: stretch;
 }
 
-.hero-card-action {
-  width: 100%;
-  justify-content: center;
+.hero-service-form input,
+.hero-service-form .custom-select-trigger {
+  min-height: 56px;
+  padding: 16px 18px;
+  border-color: rgba(248, 246, 241, 0.16);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.98);
+  color: var(--green-deep);
+  font-size: 1.05rem;
+  font-weight: 600;
+  box-shadow:
+    0 10px 24px rgba(10, 18, 13, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.55);
+}
+
+.hero-service-form input:hover,
+.hero-service-form .custom-select-trigger:hover {
+  border-color: rgba(248, 246, 241, 0.28);
+  background: #ffffff;
+}
+
+.hero-service-form input:focus,
+.hero-service-form .custom-select-wrapper.open .custom-select-trigger {
+  border-color: var(--accent-neon);
+  box-shadow: 0 0 0 4px rgba(183, 255, 207, 0.16);
+}
+
+.hero-service-form .custom-select-wrapper {
+  position: relative;
+  z-index: 1;
+}
+
+.hero-service-form .custom-select-wrapper.open {
+  z-index: 8;
+}
+
+.hero-service-form .custom-select-menu {
+  z-index: 12;
+  max-height: 220px;
+  overflow-y: auto;
+  border-radius: 18px;
+  border-color: rgba(31, 61, 43, 0.12);
+  box-shadow: 0 22px 44px rgba(10, 18, 13, 0.18);
+  padding: 8px;
+}
+
+.hero-service-form .custom-select-item {
+  min-height: 50px;
+  border-radius: 12px;
+}
+
+.hero-service-form .custom-select-item.selected {
+  background: rgba(183, 255, 207, 0.18);
+}
+
+.hero-service-form .custom-select-item:hover {
+  background: rgba(183, 255, 207, 0.12);
+}
+
+.hero-intake-submit {
+  margin-top: 2px;
 }
 
 @media (max-width: 1100px) {
@@ -197,19 +264,35 @@
   }
 
   .hero h1 {
-    font-size: clamp(3.2rem, 14vw, 5.2rem);
+    max-width: none;
+    font-size: clamp(3.4rem, 14vw, 5.8rem);
+  }
+
+  .hero-nowrap {
+    white-space: normal;
   }
 }
 
 @media (max-width: 640px) {
   .hero {
-    padding-bottom: 40px;
+    padding: 104px clamp(20px, 4vw, 48px) 40px;
   }
 
   .hero-actions {
     display: grid;
   }
+
+  .hero-panel-shell {
+    padding: 24px;
+  }
+
+  .intake-row.hero-intake-row {
+    grid-template-columns: 1fr;
+  }
 }
 
-
+.hero-service-form input::placeholder {
+  color: rgba(31, 61, 43, 0.52);
+  font-weight: 500;
+}
 

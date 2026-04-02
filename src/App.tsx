@@ -1,4 +1,5 @@
 import { Footer } from "./components/layout/Footer";
+import { Navbar } from "./components/layout/Navbar";
 import { CTASection } from "./components/sections/CTASection";
 import { ContactSection } from "./components/sections/ContactSection";
 import { HeroSection } from "./components/sections/HeroSection";
@@ -11,6 +12,7 @@ import { TrustStrip } from "./components/sections/TrustStrip";
 function App() {
   return (
     <div className="page-shell">
+      <Navbar />
       <HeroSection />
       <main>
         {/* <TrustStrip /> */}
